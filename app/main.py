@@ -1,10 +1,18 @@
 from fastapi import FastAPI
 from app.db.model import Answer
-
+from fastapi.middleware.cors import CORSMiddleware
 from app.api import api
 
 app = FastAPI()
 
+# Allow all origins
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_credentials=True,
+    allow_methods=["GET", "OPTIONS", "POST", "PUT", "DELETE"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def root():
